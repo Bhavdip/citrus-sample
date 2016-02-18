@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "com.citrus.sample"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    // To enable larger heap size
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+    defaultConfig {
+        // Enabling multidex support.
+        multiDexEnabled true
+    }
+    useLibrary 'org.apache.http.legacy'
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.android.support:design:23.1.0'
+    compile 'com.mcxiaoke.viewpagerindicator:library:2.4.1@aar'
+    // Using Citrus SDK
+    compile 'com.citrus.sdk:payment-sdk:3.4.0:retrofitnewRelease@aar'
+    // citrus sdk dependencies for retrofit
+    // For retrofit version 2.0
+    compile('com.squareup.retrofit:retrofit:2.0.0-beta2') {
+        exclude module: 'okhttp'
+    }
+    compile 'com.squareup.okhttp3:okhttp:3.1.2'
+    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+    compile 'com.squareup.okhttp:logging-interceptor:2.6.0'//to enable http logging
+
+
+    // Other retrofit dependencies.( This is mandatory for retrofit 1.9 and retrofit 2.0)
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.1.2'
+    compile 'com.squareup.okio:okio:1.6.0'
+    compile 'com.orhanobut:logger:1.11'
+    compile 'de.greenrobot:eventbus:3.0.0-beta1'
+    //Conceal provides easy Android APIs for performing fast encryption and authentication of data
+    compile 'com.facebook.conceal:conceal:1.0.3'
+
+    // Other additional dependencies (You may skip these if you are already using these in your app).
+    compile 'com.android.support:recyclerview-v7:23.1.0'
+    compile 'com.google.android.gms:play-services-analytics:8.4.0'
+
+}
